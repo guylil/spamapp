@@ -9,8 +9,7 @@ import {AdWindowComponent} from './ad-window/ad-window.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'spam';
-  // interval: any;
+  title = 'Spam';
   @ViewChild (AdHostDirective, {static: true}) adHost: AdHostDirective;
   constructor(private adsService: AdsService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -19,14 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.adsService.currentAd.subscribe(
       ad => this.popAnAd(ad)
     );
-    // if (this.adsService.currentAd) {
-    // this.popAnAd(this.adsService.currentAd);
-    // }
-    // this.interval = setInterval(() => this.popAnAd(this.adsService.currentAd), 2000);
   }
   ngOnDestroy() {
     this.adsService.unsubscribeAds();
-    // clearInterval(this.interval);
   }
   popAnAd(data) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AdWindowComponent);

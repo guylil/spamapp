@@ -20,23 +20,14 @@ export class AdsService {
       .pipe(ad => this.currentAd = ad)
       .subscribe(
       x => {
-        // const currentAd = {...x, date: new Date()};
         this.ads.push({...x, date: new Date()});
-        // this.showAd(this.currentAd);
-        // console.log('next: ', x);
       },
       err => console.log('error: ', err),
       () => console.log('finished')
     );
   }
-  showAd(ad) {console.log(JSON.stringify(ad));
-  }
   unsubscribeAds() {
     this.adsSub.unsubscribe();
-  }
-  getAds1() {
-    // console.log(this.adsSub);
-    // return this.adDispatcher.adEvents$.pipe(x => x.type);
   }
 }
 

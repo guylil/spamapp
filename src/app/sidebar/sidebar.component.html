@@ -1,7 +1,4 @@
-<p>sidebar works!</p>
-<h2>Ads</h2>
-<!--<h3>{{time | async}}</h3>-->
-<!--ads1:<h3>{{ads1 | async}}</h3>-->
+<h2>List of ads:</h2>
 <form action="">
   <mat-form-field>
     <input matInput placeholder="From" type="text">
@@ -10,12 +7,9 @@
     <input matInput placeholder="To" type="text">
   </mat-form-field>
 </form>
-<div>ads list</div>
 <div *ngFor="let ad of ads.reverse()">
   <span>{{ad.date | date:'mediumTime'}} </span>
+  <span>Ad: {{ad.creative.name}}</span> |
   <span>Type: {{ad.type}}</span> |
-  <span>{{ad.creative.name}}</span> |
-  <a href="ad.cretive.url">link</a>
-<!--  <div>Name: {{ad.creative.name}}</div>-->
-<!--  <div>Url: {{ad.creative.url}}</div>-->
+  <a [href]=ad.creative.url>link</a>
 </div>
