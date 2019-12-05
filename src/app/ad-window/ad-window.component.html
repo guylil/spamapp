@@ -1,0 +1,9 @@
+<mat-card class="ad-window"
+          [ngStyle]="{backgroundColor: 'white', marginTop: ad.coordinates.y+'px', marginLeft: ad.coordinates.x+'px'}"
+>
+  <div *ngIf="ad.type==='IMAGE' then displayImg; else displayVid"></div>
+  <ng-template #displayImg><img [src]=ad.creative.url [alt]=ad.creative.name></ng-template>
+  <ng-template #displayVid>
+    <video [src]="ad.creative.url" autoplay [muted]="true" controls></video></ng-template>
+</mat-card>
+

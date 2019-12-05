@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdsService} from '../ads.service';
+import {Ad, AdsService} from '../ads.service';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -8,14 +8,14 @@ import {Observable} from 'rxjs';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  ads: any[];
+  ads;
   time: Observable<any>;
 
   constructor( private adsService: AdsService) { }
 
   ngOnInit() {
     this.ads = this.adsService.ads;
-    this.time = new Observable<string>(observer => {setInterval (() => observer.next(new Date().toString()), 1000); });
+    // this.time = new Observable<string>(observer => {setInterval (() => observer.next(new Date().toString()), 1000); });
   }
 
 }

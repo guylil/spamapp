@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AdDispatcher } from 'ubimo-fed-home-assigment';
+import {AdDispatcher, ICreative} from 'ubimo-fed-home-assigment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdsService {
-  currentAd;
-  ads = [];
+  currentAd: Ad;
+  ads: Ad[] = [];
   adsSub;
   constructor(
     public adDispatcher: AdDispatcher
   ) {
     let a = setInterval(() => console.log('currAd: ', JSON.stringify(this.currentAd)), 1000);
-    let b = setTimeout(() => {this.unsubscribeAds(); clearInterval(a)}, 28000);
+    // let b = setTimeout(() => {this.unsubscribeAds(); clearInterval(a)}, 28000);
   }
   subscribeAds() {
     this.adsSub = this.adDispatcher.adEvents$.subscribe(
@@ -35,4 +35,14 @@ export class AdsService {
     // console.log(this.adsSub);
     // return this.adDispatcher.adEvents$.pipe(x => x.type);
   }
+}
+
+export interface Ad {
+  date: Date;
+  type: 'IMAGE' | 'VIDEO';
+  coordinates: {
+    x: number;
+    y: number;
+  };
+  creative: ICreative;
 }

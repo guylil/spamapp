@@ -2,24 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AdDispatcher} from 'ubimo-fed-home-assigment';
-import {MatInputModule, MatSidenavModule} from '@angular/material/';
+import {MatCardModule, MatInputModule, MatSidenavModule} from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdWindowComponent } from './ad-window/ad-window.component';
+import { AdHostDirective } from './ad-host.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     SidebarComponent,
+    AdWindowComponent,
+    AdHostDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule, MatInputModule
+    MatSidenavModule, MatInputModule, MatCardModule
   ],
   providers: [AdDispatcher],
   bootstrap: [AppComponent]
