@@ -1,12 +1,16 @@
 <h2>List of ads:</h2>
-<form action="">
+<form>
   <mat-form-field>
-    <input matInput placeholder="From" type="text">
+    <input matInput placeholder="From" type="timedate" [(ngModel)]="from" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="To" type="text">
+    <input matInput placeholder="To" type="timedate" [(ngModel)]="to" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
 </form>
+<div>
+  <button mat-button (click)="filterByRange(from, to)">Filter</button>
+  <button mat-button (click)="reload()">Refresh</button>
+</div>
 <div *ngFor="let ad of ads.reverse()">
   <span>{{ad.date | date:'mediumTime'}} </span>
   <span>Ad: {{ad.creative.name}}</span> |
