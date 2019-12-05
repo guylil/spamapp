@@ -7,7 +7,7 @@ import {Ad} from '../ads.service';
   styleUrls: ['./ad-window.component.scss']
 })
 export class AdWindowComponent implements OnInit {
-  @Input() ad: Ad;
+  @Input() data: Ad;
   constructor() { }
 
   ngOnInit() {

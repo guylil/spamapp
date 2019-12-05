@@ -1,5 +1,7 @@
-import {Component, ComponentFactoryResolver, OnDestroy, OnInit} from '@angular/core';
-import {AdsService} from './ads.service';
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Ad, AdsService} from './ads.service';
+import {AdHostDirective} from './ad-host.directive';
+import {AdWindowComponent} from './ad-window/ad-window.component';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +10,31 @@ import {AdsService} from './ads.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'spam';
-
+  // interval: any;
+  @ViewChild (AdHostDirective, {static: true}) adHost: AdHostDirective;
   constructor(private adsService: AdsService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
-
   ngOnInit() {
     this.adsService.subscribeAds();
-    // const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.adsService.currentAd);
-    // const viewContainerRef = this.adHost.viewContainerRef;
-    // viewContainerRef.clear();
-
+    this.adsService.currentAd.subscribe(
+      ad => this.popAnAd(ad)
+    );
+    // if (this.adsService.currentAd) {
+    // this.popAnAd(this.adsService.currentAd);
+    // }
+    // this.interval = setInterval(() => this.popAnAd(this.adsService.currentAd), 2000);
   }
   ngOnDestroy() {
     this.adsService.unsubscribeAds();
+    // clearInterval(this.interval);
+  }
+  popAnAd(data) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AdWindowComponent);
+    const viewContainerRef = this.adHost.viewContainerRef;
+    const componentRef = viewContainerRef.createComponent(componentFactory);
+    (componentRef.instance as AdWindowComponent).data = data;
+    // @ts-ignore
+    setTimeout(() => { viewContainerRef.remove(viewContainerRef.indexOf(componentRef)); } , 5000);
   }
 }
+

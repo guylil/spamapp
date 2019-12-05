@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
-import {AdDispatcher, ICreative} from 'ubimo-fed-home-assigment';
+import {AdDispatcher, IAdEvent, ICreative} from 'ubimo-fed-home-assigment';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdsService {
-  currentAd: Ad;
+  currentAd: Observable<IAdEvent>;
   ads: Ad[] = [];
   adsSub;
   constructor(
     public adDispatcher: AdDispatcher
   ) {
-    let a = setInterval(() => console.log('currAd: ', JSON.stringify(this.currentAd)), 1000);
+    // let a = setInterval(() => console.log('currAd: ', JSON.stringify(this.currentAd)), 1000);
     // let b = setTimeout(() => {this.unsubscribeAds(); clearInterval(a)}, 28000);
   }
   subscribeAds() {
-    this.adsSub = this.adDispatcher.adEvents$.subscribe(
+    this.adsSub = this.adDispatcher.adEvents$
+      .pipe(ad => this.currentAd = ad)
+      .subscribe(
       x => {
-        this.currentAd = {...x, date: new Date()};
-        this.ads.push(this.currentAd);
+        // const currentAd = {...x, date: new Date()};
+        this.ads.push({...x, date: new Date()});
         // this.showAd(this.currentAd);
         // console.log('next: ', x);
       },

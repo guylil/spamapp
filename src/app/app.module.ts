@@ -10,22 +10,24 @@ import { MapComponent } from './map/map.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdWindowComponent } from './ad-window/ad-window.component';
 import { AdHostDirective } from './ad-host.directive';
+import {AdsService} from './ads.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     SidebarComponent,
-    AdWindowComponent,
     AdHostDirective,
+    AdWindowComponent,
   ],
+  entryComponents: [AdWindowComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule, MatInputModule, MatCardModule
   ],
-  providers: [AdDispatcher],
+  providers: [AdDispatcher, AdsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

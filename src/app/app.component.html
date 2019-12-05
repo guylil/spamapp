@@ -329,10 +329,10 @@
   </mat-sidenav>
 <!--  <mat-sidenav position="end" opened>End</mat-sidenav>-->
   <section>
-      <ng-template></ng-template>
-      <div *ngFor="let ad of adsService.ads">
-        <app-ad-window [ad]=ad></app-ad-window>
-      </div>
+      <ng-template appAdHost></ng-template>
+<!--      <div *ngFor="let ad of adsService.ads">-->
+<!--        <app-ad-window [data]=ad></app-ad-window>-->
+<!--      </div>-->
       <app-map></app-map>
   </section>
 </mat-sidenav-container>
